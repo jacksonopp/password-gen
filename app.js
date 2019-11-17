@@ -13,8 +13,27 @@ function start() {
   const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   const specialCharacters = "!@#$%^&*()_+=-<>,.?/~`"
   const numbers = "1234567890"
-  const randomIndex = (randStr) => {
+
+  function randomIndex(randStr) {
     return Math.floor(Math.random() * randStr.length)
+  }
+
+  function getRandomCharacter(type, length, divisor, arrayCB) {
+    for (let i = 0; i < Math.ceil(length / divisor); i++) {
+      const randomCharacter = type.charAt(randomIndex(type))
+      arrayCB.push(randomCharacter);
+    }
+  }
+
+  function shuffleArray(a) {
+    let j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+    }
+    return a;
   }
 
 
@@ -37,15 +56,30 @@ function start() {
 
     console.log("howMany", howManyTypes)
 
-    for (let i = 0; i < passwordLength; i++) {
-      const randomCharacter = lowercaseLetters.charAt(randomIndex(lowercaseLetters));
-      output.push(randomCharacter);
+    if (howManyTypes > 0) {
+      if (areLowercase) {
+        getRandomCharacter(lowercaseLetters, passwordLength, howManyTypes, output);
+      }
+      if (areUppercase) {
+        getRandomCharacter(uppercaseLetters, passwordLength, howManyTypes, output);
+      }
+      if (areSpecial) {
+        getRandomCharacter(specialCharacters, passwordLength, howManyTypes, output);
+      }
+      if (areNumbers) {
+        getRandomCharacter(numbers, passwordLength, howManyTypes, output);
+      }
+      const outputTrimmed = output.slice(0, passwordLength)
+      const outputShuffled = shuffleArray(outputTrimmed)
+      const outputStr = outputShuffled.join("")
+      passwordP.innerText = `${outputStr}`;
+    } else {
+      passwordP.innerText = "Please select at least one type"
     }
-    passwordP.innerText = output.join("");
   }
 
   generateBtn.addEventListener("click", () => {
-    generatePassword(slider.value, true, true, false, true);
+    generatePassword(slider.value, false, true, true, true);
   })
 }
 
