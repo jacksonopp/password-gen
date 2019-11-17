@@ -10,25 +10,43 @@ function start() {
   }
 
   const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz"
-  const randomNumber = (randStr) => {
+  const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const specialCharacters = "!@#$%^&*()_+=-<>,.?/~`"
+  const numbers = "1234567890"
+  const randomIndex = (randStr) => {
     return Math.floor(Math.random() * randStr.length)
   }
 
-  const output = []
 
-  function generatePassword(passwordLength) {
-    generateBtn.addEventListener("click", () => {
-      passwordP.innerHTML = "";
-      for (let i = 0; i < passwordLength; i++) {
-        const randomLetter = lowercaseLetters.charAt(randomNumber(lowercaseLetters));
-        console.log("letter", randomLetter);
-        output.push(randomLetter);
-      }
-      console.log(output);
-      passwordP.innerText = output.join("");
-    })
+  function generatePassword(passwordLength, areLowercase, areUppercase, areSpecial, areNumbers) {
+    passwordP.innerHTML = "";
+    const output = [];
+    let howManyTypes = 0
+    if (areLowercase) {
+      howManyTypes++
+    }
+    if (areUppercase) {
+      howManyTypes++
+    }
+    if (areSpecial) {
+      howManyTypes++
+    }
+    if (areNumbers) {
+      howManyTypes++
+    }
+
+    console.log("howMany", howManyTypes)
+
+    for (let i = 0; i < passwordLength; i++) {
+      const randomCharacter = lowercaseLetters.charAt(randomIndex(lowercaseLetters));
+      output.push(randomCharacter);
+    }
+    passwordP.innerText = output.join("");
   }
-  generatePassword(slider.value);
+
+  generateBtn.addEventListener("click", () => {
+    generatePassword(slider.value, true, true, false, true);
+  })
 }
 
 start();
