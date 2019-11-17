@@ -2,7 +2,12 @@ function start() {
   const generateBtn = document.getElementById("generate-password");
   const passwordP = document.getElementById("password");
   const slider = document.getElementById("formControlRange");
-  const passwordLengthOutput = document.getElementById("password-length-output")
+  const passwordLengthOutput = document.getElementById("password-length-output");
+  const lowercaseCheckBox = document.getElementById("lowercase-check");
+  const uppercaseCheckBox = document.getElementById("uppercase-check");
+  const numberCheckBox = document.getElementById("number-check");
+  const specialCheckBox = document.getElementById("special-check")
+
   passwordLengthOutput.innerHTML = slider.value;
 
   slider.oninput = function () {
@@ -79,7 +84,12 @@ function start() {
   }
 
   generateBtn.addEventListener("click", () => {
-    generatePassword(slider.value, false, true, true, true);
+    const wantsLower = lowercaseCheckBox.checked;
+    const wantsUpper = uppercaseCheckBox.checked;
+    const wantsSpecial = numberCheckBox.checked;
+    const wantsNumber = specialCheckBox.checked;
+    console.log("stuff", wantsLower, wantsUpper, wantsSpecial, wantsNumber);
+    generatePassword(slider.value, wantsLower, wantsUpper, wantsSpecial, wantsNumber);
   })
 }
 
