@@ -30,6 +30,7 @@ function start() {
     }
   }
 
+  // from stack overflow
   function shuffleArray(a) {
     let j, x, i;
     for (i = a.length - 1; i > 0; i--) {
@@ -59,7 +60,7 @@ function start() {
       howManyTypes++
     }
 
-    console.log("howMany", howManyTypes)
+    // console.log("howMany", howManyTypes)
 
     if (howManyTypes > 0) {
       if (areLowercase) {
@@ -88,7 +89,7 @@ function start() {
     const wantsUpper = uppercaseCheckBox.checked;
     const wantsSpecial = numberCheckBox.checked;
     const wantsNumber = specialCheckBox.checked;
-    console.log("stuff", wantsLower, wantsUpper, wantsSpecial, wantsNumber);
+    // console.log("stuff", wantsLower, wantsUpper, wantsSpecial, wantsNumber);
     generatePassword(slider.value, wantsLower, wantsUpper, wantsSpecial, wantsNumber);
   })
 }
