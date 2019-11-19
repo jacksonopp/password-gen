@@ -75,9 +75,9 @@ function start() {
       if (areNumbers) {
         getRandomCharacter(numbers, passwordLength, howManyTypes, output);
       }
-      const outputTrimmed = output.slice(0, passwordLength)
-      const outputShuffled = shuffleArray(outputTrimmed)
-      const outputStr = outputShuffled.join("")
+      const outputTrimmed = output.slice(0, passwordLength);
+      const outputShuffled = shuffleArray(outputTrimmed);
+      const outputStr = outputShuffled.join("");
       passwordP.innerText = `${outputStr}`;
     } else {
       passwordP.innerText = "Please select at least one type"
